@@ -6,14 +6,23 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        validateAuth()
     }
-
-
+    func validateAuth() {
+        if FirebaseAuth.Auth.auth().currentUser == nil {
+            let vc = Login()
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            let moreVC = Constant.shared.setUpStoryboard(name: "Home").instantiateViewController(identifier: "tabBarScreen")
+            moreVC.fullScreenNavigation()
+            self.present(moreVC, animated: true, completion: nil)
+        }
+    }
 }
 
