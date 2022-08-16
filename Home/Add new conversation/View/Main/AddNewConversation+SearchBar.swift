@@ -26,7 +26,7 @@ extension AddNewConversation: UISearchBarDelegate {
         guard let text = searchBar.text, !text.replacingOccurrences(of: " ", with: "").isEmpty else {
             return
         }
-        presenter.searchBarButtonClicked(searchBar)
+        presenter.searchBarButtonClicked(text: text)
         
     }
     

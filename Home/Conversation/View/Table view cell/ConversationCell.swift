@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ConversationCell: UITableViewCell {
 
@@ -21,5 +22,23 @@ class ConversationCell: UITableViewCell {
         view.layer.cornerRadius = 16
         view.addShadowToView()
     }
+    
+    
+    // MARK: - Download image
+    func download_image(model: ConversationModel) {
+        let path = "\(model.otherUserEmail)_profile_picture.png"
+        StorageManager.shared.downloadPhoto(fileName: path, completion: { [weak self] result in
+            switch result {
+            case .success(let url):
+                let stringUrl = URL(string: url)
+                self?.user_image.kf.indicatorType = .activity
+                self?.user_image.kf.setImage(with: stringUrl)
+            case .failure(let error):
+                print("\(error)")
+            }
+        })
+    }
+
+    
     
 }

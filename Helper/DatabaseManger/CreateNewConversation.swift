@@ -146,7 +146,6 @@ extension DatabaseManager {
             }
             completion(true)
         })
-        
     }
     // MARK: -  Message kind
     func messageKinde(message: Message) -> String {

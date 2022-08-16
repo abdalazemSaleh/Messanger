@@ -31,6 +31,10 @@ extension Conversation: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         presenter.cellForRow(tableView, cellForRowAt: indexPath)
     }
+    /// Did selct row at
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presenter.didSelectRowAt(tableView, didSelectRowAt: indexPath)
+    }
     /// View for header
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return headerForSection()
@@ -49,6 +53,5 @@ extension Conversation: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 120
     }
-    
     
 }

@@ -6,31 +6,44 @@
 //
 
 import UIKit
-import FirebaseAuth
+import Kingfisher
 
 class Profile: UIViewController {
 
+    // MARK: - Variables
+    var presenter: ProfilePresenter!
+    let name = UserDefaults.standard.value(forKey: "name")
+    
     // MARK: - View did load
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter = ProfilePresenter(view: self)
         handelUserImage()
         handelLogoutButton()
+        imageTap_in()
+        presenter.downloadPhoto()
+        guard let name = name as? String else {
+            return
+        }
+        userName.text = name
     }
     // MARK: - IBOutlet
     @IBOutlet var user_image: UIImageView!
+    @IBOutlet var userName: UILabel!
     @IBOutlet var logoutButton: UIButton!
     // MARK: - IBAction
     @IBAction func logoutButton(_ sender: UIButton) {
-        logout()
+        presenter.logout()
     }
-    // MARK: - Logout
-    func logout() {
-        do {
-            try FirebaseAuth.Auth.auth().signOut()
-        } catch {
-            print("Error")
-        }
-        
+    // MARK: - Handel image tapped in
+    func imageTap_in() {
+        user_image.isUserInteractionEnabled = true
+        let gesture = UITapGestureRecognizer(target: self,
+                                             action: #selector(changeProfilePic))
+        user_image.addGestureRecognizer(gesture)
+    }
+    @objc func changeProfilePic() {
+        presenter.presentPhotoActionSheet()
     }
     // MARK: - Handel view
     /// User_image

@@ -23,18 +23,20 @@ protocol StartNewConversation {
 class AddNewConversationPresenter {
     // about init and delegation
     private weak var view: AddNewConversationrView?
-    init(view: AddNewConversationrView) {
+    init(view: AddNewConversationrView, delegate: StartNewConversation) {
         self.view = view
+        self.delegate = delegate
     }
     // Variables
     private var users = [[String: String]]()
     private var results = [SearchResult]()
     private var hasFetched = false
-    var delegate: StartNewConversation!
+    var delegate: StartNewConversation?
     // Number of sections
     func numberOfSections(in tableView: UITableView) -> Int {
         return results.count
     }
+    
     // Cell for row at
     func tableViewCellForRow(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "AddNewConversationCell", for: indexPath) as! AddNewConversationCell
@@ -42,20 +44,21 @@ class AddNewConversationPresenter {
         cell.name.text = model.name
         return cell
     }
+    
     // Did select row
     func didSelectRow(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let targetUser = results[indexPath.row]
         // Handel delegate
-        print("Let's")
         view?.goToConverastionScreen()
         delegate?.startNewConversation(targetUser: targetUser)
-        print("Start")
     }
+    
     // Search bar button clicked
-    func searchBarButtonClicked(_ searchBar: UISearchBar) {
+    func searchBarButtonClicked(text: String) {
         results.removeAll()
-        searchForUsers(query: "A")
+        searchForUsers(query: text)
     }
+    
     // Search for users
     func searchForUsers(query: String) {
         /// Check if array has firebase results
@@ -68,6 +71,7 @@ class AddNewConversationPresenter {
             fetchAllUsers(query: query)
         }
     }
+    
     // Fetch all users
     func fetchAllUsers(query: String) {
         DatabaseManager.shared.fetchAllUsers(completion: { [weak self] result in
@@ -81,6 +85,7 @@ class AddNewConversationPresenter {
             }
         })
     }
+    
     // Filter users
     func filterUsers(with: String) {
         guard let currentUserEmail = UserDefaults.standard.value(forKey: "email") as? String, hasFetched else {
