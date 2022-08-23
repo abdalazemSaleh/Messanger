@@ -17,6 +17,7 @@ extension StorageManager {
                 completion(.failure(StorageManagerError.FailedToUpload))
                 return
             }
+            print("Upload successed")
         })
     }
 
@@ -24,7 +25,7 @@ extension StorageManager {
     func downloadPhoto(fileName: String, completion: @escaping (Result<String, Error>) -> Void) {
         storage.child("images/\(fileName)").downloadURL(completion: { url, error in
             guard let url = url else {
-                print("Failed to download photo form storage")
+                print(error?.localizedDescription)
                 completion(.failure(StorageManagerError.FailedToDownload))
                 return
             }

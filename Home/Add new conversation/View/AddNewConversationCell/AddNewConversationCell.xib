@@ -20,8 +20,8 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PS2-x9-0bj">
                         <rect key="frame" x="16" y="8" width="370" height="90"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Test" translatesAutoresizingMaskIntoConstraints="NO" id="1hm-t4-fId">
-                                <rect key="frame" x="8" y="8" width="62" height="62"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="1hm-t4-fId">
+                                <rect key="frame" x="8" y="8.5" width="62" height="61"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="62" id="Xp0-qi-jeP"/>
                                     <constraint firstAttribute="height" constant="62" id="lwP-Wc-mWx"/>
@@ -56,11 +56,11 @@
                 <outlet property="user_image" destination="1hm-t4-fId" id="r37-Sf-To6"/>
                 <outlet property="view" destination="PS2-x9-0bj" id="ZMT-5A-0xB"/>
             </connections>
-            <point key="canvasLocation" x="197.10144927536234" y="134.59821428571428"/>
+            <point key="canvasLocation" x="422" y="84"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="Test" width="200" height="200"/>
+        <image name="person.circle" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

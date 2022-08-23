@@ -12,6 +12,8 @@ protocol ConversationView: AnyObject {
     func doSomeThing(result: SearchResult)
     func reloadTableView()
     func openExistsConversation(modal: ConversationModel)
+    func stopAnimation()
+    func hideAnimation()
 }
 
 // MARK: - Presenter
@@ -38,12 +40,15 @@ class ConversationPresenter {
                     return
                 }
                 self?.conversationArr = conversations
-
+                self?.view?.stopAnimation()
+                self?.view?.hideAnimation()
                 DispatchQueue.main.async {
                     self?.view?.reloadTableView()
                 }
             case .failure(let error):
                 print("failed to get convos: \(error)")
+                self?.view?.stopAnimation()
+                self?.view?.hideAnimation()
             }
         })
     }

@@ -34,7 +34,16 @@ extension Conversation: ConversationView {
         vc.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(vc, animated: true)
     }
+        
+    /// Stop animation
+    func stopAnimation() {
+        animationView?.stop()
+    }
     
+    /// Hide animation
+    func hideAnimation() {
+        animationView?.isHidden = true
+    }
 }
 
 extension Conversation: StartNewConversation {

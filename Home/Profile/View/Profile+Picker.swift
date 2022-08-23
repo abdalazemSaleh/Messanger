@@ -18,6 +18,7 @@ extension Profile: UIImagePickerControllerDelegate, UINavigationControllerDelega
             return
         }
         self.user_image.image = selectedImage
+        presenter.upload_image(image: user_image)
     }
 
     /// image picker did canse

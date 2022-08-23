@@ -9,20 +9,29 @@ import UIKit
 import TransitionButton
 
 class Login: UIViewController {
-
+    
     // MARK: - Variables
     var presnter: LoginPresenter!
     
+//    private let facebookLoginButton: FBLoginButton = {
+//        let button = FBLoginButton()
+//        button.permissions = ["email", "public_profile"]
+//        return button
+//    }()
+
     // MARK: - View did load
     override func viewDidLoad() {
         super.viewDidLoad()
         facebookButton.circleShape()
         twitterButton.circleShape()
-        facebookButton.addShadow()
         twitterButton.addShadow()
+        facebookButton.addShadow()
+        loginButton.layer.cornerRadius = 16
         presnter = LoginPresenter(view: self)
         self.navigationController?.isNavigationBarHidden = true
     }
+
+    
     // MARK: - IBOutlet
     @IBOutlet var emailTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
@@ -44,5 +53,8 @@ class Login: UIViewController {
         let vc = Register()
         self.navigationController?.pushViewController(vc, animated: true)
     }
-
+    
+    @IBAction func facebookButton(_ sender: UIButton) {
+        presnter.loginButtonClicked(myController: self)
+    }
 }

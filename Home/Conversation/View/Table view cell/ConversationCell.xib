@@ -19,8 +19,8 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ayd-WA-Kyb">
                         <rect key="frame" x="16" y="8" width="576" height="103"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Test" translatesAutoresizingMaskIntoConstraints="NO" id="hVT-m3-9dx">
-                                <rect key="frame" x="8" y="8" width="88" height="88"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="hVT-m3-9dx">
+                                <rect key="frame" x="8" y="8.5" width="88" height="87"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="88" id="lUd-pu-Cxb"/>
                                     <constraint firstAttribute="width" constant="88" id="y2i-ms-hbE"/>
@@ -69,6 +69,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="Test" width="200" height="200"/>
+        <image name="person.circle" catalog="system" width="128" height="121"/>
     </resources>
 </document>

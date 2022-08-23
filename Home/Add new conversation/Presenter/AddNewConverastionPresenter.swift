@@ -42,6 +42,7 @@ class AddNewConversationPresenter {
         let cell = tableView.dequeueReusableCell(withIdentifier: "AddNewConversationCell", for: indexPath) as! AddNewConversationCell
         let model = results[indexPath.row]
         cell.name.text = model.name
+        cell.download_image(model: model)
         return cell
     }
     

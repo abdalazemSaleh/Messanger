@@ -44,4 +44,15 @@ extension Profile: ProfileView {
         user_image.kf.indicatorType = .activity
         user_image.kf.setImage(with: imageUrl)
     }
+    
+    /// Finish logout
+    func finishLogout() {
+        UserDefaults.standard.setValue(nil, forKey: "email")
+        UserDefaults.standard.setValue(nil, forKey: "name")
+
+        let vc = Login()
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true)
+    }
 }

@@ -14,6 +14,7 @@ protocol ProfileView: AnyObject {
     func presentCamera()
     func getPhoto() -> UIImageView
     func setProfilePicture(url: String)
+    func finishLogout()
 }
 
 class ProfilePresenter {
@@ -48,7 +49,8 @@ class ProfilePresenter {
     //MARK: - Download photo from firbase storage
     func downloadPhoto() {
         /// Get file name
-        let fileName = "\(getSafeEmail())_profile_picture.png"
+        let fileName = "\(getSafeEmail())profile_picture.png"
+        print(getSafeEmail())
         StorageManager.shared.downloadPhoto(fileName: fileName, completion: { [weak self] result in
             switch result {
             case .success(let url):
@@ -63,6 +65,7 @@ class ProfilePresenter {
     func logout() {
         do {
             try FirebaseAuth.Auth.auth().signOut()
+            view?.finishLogout()
         } catch {
             print("Error")
         }
@@ -82,10 +85,6 @@ class ProfilePresenter {
             return
         }
         view?.presentActionSheet(sheet: actionSheet)
-        guard let imageView = view?.getPhoto() else {
-            return
-        }
-        upload_image(image: imageView)
     }
         
     /// Action sheet

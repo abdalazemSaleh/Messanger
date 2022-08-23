@@ -25,5 +25,32 @@
 	<string>Please allow access to take a profile picture</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Please allow access to select photo for your profile</string>
+    
+    
+    <key>CFBundleURLTypes</key>
+    <array>
+      <dict>
+      <key>CFBundleURLSchemes</key>
+      <array>
+        <string>fb737252310906887</string>
+      </array>
+      </dict>
+    </array>
+    <key>FacebookAppID</key>
+    <string>737252310906887</string>
+    <key>FacebookClientToken</key>
+    <string>0d489dbb6c6a0457e5f95f0d81aa3d9c</string>
+    <key>FacebookDisplayName</key>
+    <string>Messenger</string>
+    
+    
+    
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+      <string>fbapi</string>
+      <string>fb-messenger-share-api</string>
+    </array>
+    
+    
 </dict>
 </plist>

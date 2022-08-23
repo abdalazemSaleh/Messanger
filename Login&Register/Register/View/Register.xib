@@ -98,7 +98,7 @@
                                 <constraint firstAttribute="height" constant="48" id="7r8-9D-yhb"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="title" value="Password"/>
                                 <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Password"/>
@@ -125,7 +125,7 @@
                                 <constraint firstAttribute="height" constant="48" id="dLB-b0-vMw"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="title" value="Pssword confermation"/>
                                 <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Pssword confermation"/>
@@ -207,16 +207,19 @@
     </objects>
     <designables>
         <designable name="Ylz-P2-Boa">
-            <size key="intrinsicContentSize" width="90.5" height="34"/>
+            <size key="intrinsicContentSize" width="350" height="39.220703125"/>
+        </designable>
+        <designable name="f5a-hg-y15">
+            <size key="intrinsicContentSize" width="118" height="43"/>
         </designable>
         <designable name="gla-gA-mdd">
-            <size key="intrinsicContentSize" width="62.5" height="34"/>
+            <size key="intrinsicContentSize" width="350" height="39.220703125"/>
         </designable>
         <designable name="mmL-xo-iHI">
-            <size key="intrinsicContentSize" width="66" height="34"/>
+            <size key="intrinsicContentSize" width="350" height="39.220703125"/>
         </designable>
         <designable name="np2-EW-Uec">
-            <size key="intrinsicContentSize" width="172" height="34"/>
+            <size key="intrinsicContentSize" width="350" height="39.220703125"/>
         </designable>
     </designables>
     <resources>

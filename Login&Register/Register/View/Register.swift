@@ -17,6 +17,7 @@ class Register: UIViewController {
         super.viewDidLoad()
         presenter = RegisterPresentr(view: self)
         self.navigationController?.isNavigationBarHidden = true
+        registerButton.layer.cornerRadius = 16
     }
     
     // MARK: - IBOtlet

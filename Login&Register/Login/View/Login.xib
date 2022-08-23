@@ -75,7 +75,7 @@
                         <constraint firstAttribute="height" constant="48" id="a5i-Gq-cwo"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="string" keyPath="title" value="Password"/>
                         <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Password"/>
@@ -140,6 +140,9 @@
                                 <fontDescription key="titleFontDescription" type="boldSystem" pointSize="24"/>
                                 <color key="baseForegroundColor" red="0.17406231171630127" green="0.25184362769865676" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </buttonConfiguration>
+                            <connections>
+                                <action selector="facebookButton:" destination="-1" eventType="touchUpInside" id="VOk-v1-JHb"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gW8-NL-jR1">
                             <rect key="frame" x="90" y="0.0" width="48" height="48"/>
@@ -215,10 +218,10 @@
     </objects>
     <designables>
         <designable name="4mp-uS-unl">
-            <size key="intrinsicContentSize" width="350" height="39.220703125"/>
+            <size key="intrinsicContentSize" width="62.5" height="34"/>
         </designable>
         <designable name="KSF-xC-3ma">
-            <size key="intrinsicContentSize" width="350" height="39.220703125"/>
+            <size key="intrinsicContentSize" width="90.5" height="34"/>
         </designable>
         <designable name="Mk6-CY-WZP">
             <size key="intrinsicContentSize" width="86" height="43"/>

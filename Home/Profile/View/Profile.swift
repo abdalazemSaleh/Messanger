@@ -22,11 +22,9 @@ class Profile: UIViewController {
         handelLogoutButton()
         imageTap_in()
         presenter.downloadPhoto()
-        guard let name = name as? String else {
-            return
-        }
-        userName.text = name
+        setUserName()
     }
+    
     // MARK: - IBOutlet
     @IBOutlet var user_image: UIImageView!
     @IBOutlet var userName: UILabel!
@@ -44,6 +42,13 @@ class Profile: UIViewController {
     }
     @objc func changeProfilePic() {
         presenter.presentPhotoActionSheet()
+    }
+    // MARK: - Set user name
+    func setUserName() {
+        guard let name = name as? String else {
+            return
+        }
+        userName.text = name
     }
     // MARK: - Handel view
     /// User_image

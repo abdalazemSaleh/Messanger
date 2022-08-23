@@ -6,8 +6,9 @@
 //
 
 import Foundation
+import UIKit
 
-extension Login: LoginView {
+extension Login: LoginView {    
     /// Go to home screen
     func goToHomeScreen() {
             let moreVC = Constant.shared.setUpStoryboard(name: "Home").instantiateViewController(identifier: "tabBarScreen")
@@ -18,4 +19,5 @@ extension Login: LoginView {
     func stopAnimation() {
         loginButton.stopAnimation()
     }
+    
 }
