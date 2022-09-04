@@ -108,6 +108,8 @@ class TabBarViewController: UITabBarController {
         self.tabBar.itemWidth = width / 6
         self.tabBar.itemPositioning = .centered
         self.tabBar.unselectedItemTintColor = sColor
+        
+        self.tabBar.backgroundColor = .systemBackground
     }
     
 }

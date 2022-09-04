@@ -27,7 +27,6 @@ extension AddNewConversation: UISearchBarDelegate {
             return
         }
         presenter.searchBarButtonClicked(text: text)
-        
     }
     
 }

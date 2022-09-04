@@ -16,6 +16,7 @@ class Conversation: UIViewController {
     // MARK: - View did load
     override func viewDidLoad() {
         super.viewDidLoad()
+        tabBarController?.tabBar.isHidden = false
         presenter = ConversationPresenter(view: self)
         registerTableViewCell()
         setUpDelegateAndDataSource()

@@ -81,9 +81,7 @@ class ProfilePresenter {
         
     //MARK: - Present photo action cheet
     func presentPhotoActionSheet() {
-        guard let actionSheet = actionSheet() as? UIAlertController else {
-            return
-        }
+        let actionSheet = actionSheet()
         view?.presentActionSheet(sheet: actionSheet)
     }
         

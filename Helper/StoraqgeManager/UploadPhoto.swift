@@ -25,7 +25,6 @@ extension StorageManager {
     func downloadPhoto(fileName: String, completion: @escaping (Result<String, Error>) -> Void) {
         storage.child("images/\(fileName)").downloadURL(completion: { url, error in
             guard let url = url else {
-                print(error?.localizedDescription)
                 completion(.failure(StorageManagerError.FailedToDownload))
                 return
             }

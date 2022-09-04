@@ -7,6 +7,8 @@
 
 import UIKit
 
+#warning("Check filtering")
+
 // MARK: - Protocol
 /// Add new conversation view
 protocol AddNewConversationrView : AnyObject {

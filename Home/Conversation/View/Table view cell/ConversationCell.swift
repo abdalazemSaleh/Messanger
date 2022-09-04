@@ -23,7 +23,6 @@ class ConversationCell: UITableViewCell {
         view.addShadowToView()
     }
     
-    
     // MARK: - Download image
     func download_image(model: ConversationModel) {
         let path = "\(model.otherUserEmail)_profile_picture.png"
@@ -39,6 +38,4 @@ class ConversationCell: UITableViewCell {
         })
     }
 
-    
-    
 }

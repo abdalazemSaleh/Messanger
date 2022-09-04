@@ -155,9 +155,15 @@ extension DatabaseManager {
             firsMessage = messageText
         case .attributedText(_):
             break
-        case .photo(_):
+        case .photo(let mediaItem):
+            if let targetUrlString = mediaItem.url?.absoluteString {
+                firsMessage = targetUrlString
+            }
             break
-        case .video(_):
+        case .video(let mediaItem):
+            if let targetUrlString = mediaItem.url?.absoluteString {
+                firsMessage = targetUrlString
+            } 
             break
         case .location(_):
             break

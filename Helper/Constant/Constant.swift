@@ -16,4 +16,12 @@ class Constant {
         let storyBoard = UIStoryboard.init(name: name, bundle: Bundle.main)
         return storyBoard
     }
+    
+    func getUserSafeEmail() -> String {
+        guard let email = UserDefaults.standard.value(forKey: "email") as? String else {
+            return ""
+        }
+        let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
+        return safeEmail
+    }
 }

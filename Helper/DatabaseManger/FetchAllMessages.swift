@@ -7,7 +7,9 @@
 
 import Foundation
 import UIKit
+import MessageKit
 
+#warning("Some refactoring in here")
 extension DatabaseManager {
     func fetchAllMessagesForConversation(id: String, completion: @escaping (Result<[Message], Error>) -> Void) {
         database.child("\(id)/messages").observe(.value, with: { snapshot in
@@ -21,10 +23,39 @@ extension DatabaseManager {
                     let messageID = dictionary["id"] as? String,
                     let content = dictionary["content"] as? String,
                     let senderEmail = dictionary["sender_email"] as? String,
-//                    let type = dictionary["type"] as? String,
+                    let type = dictionary["type"] as? String,
                     let dateString = dictionary["date"] as? String,
                     let date = UIViewController.dateFormatter.date(from: dateString)else {
                         return nil
+                }
+                var kind: MessageKind?
+                if type == "photo" {
+                    guard let placholder = UIImage(systemName: "photo"),
+                    let imageUrl = URL(string: content) else {
+                        return nil
+                    }
+                    let media = Media(url: imageUrl,
+                                      image: nil,
+                                      placeholderImage: placholder,
+                                      size: CGSize(width: 240, height: 300))
+                    kind = .photo(media)
+                }
+                else if type == "video" {
+                    guard let placholder = UIImage(systemName: "photo"),
+                    let videoUrl = URL(string: content) else {
+                        return nil
+                    }
+                    let media = Media(url: videoUrl,
+                                      image: nil,
+                                      placeholderImage: placholder,
+                                      size: CGSize(width: 240, height: 300))
+                    kind = .video(media)
+                } else {
+                    kind = .text(content)
+                }
+                
+                guard let finalKind = kind else {
+                    return nil
                 }
                 
                 let sender = sender(senderId: senderEmail,
@@ -33,7 +64,7 @@ extension DatabaseManager {
                 return Message(sender: sender,
                                messageId: messageID,
                                sentDate: date,
-                               kind: .text(content))
+                               kind: finalKind)
             })
             completion(.success(messages))
             

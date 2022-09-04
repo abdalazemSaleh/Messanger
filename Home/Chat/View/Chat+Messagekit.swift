@@ -15,6 +15,8 @@ extension Chat: MessagesLayoutDelegate, MessagesDataSource, MessagesDisplayDeleg
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
+        messagesCollectionView.messageCellDelegate = self
+        messagesCollectionView.delegate = self
     }
     // MARK: - Delegate & data source
     /// Current sender
@@ -26,14 +28,16 @@ extension Chat: MessagesLayoutDelegate, MessagesDataSource, MessagesDisplayDeleg
     }
     /// Number of sections
     func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
-        return messages.count
+        return presenter.number_ofSections()
     }
     
     /// Message for item
     func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
-        return messages[indexPath.section]
-        
+        return presenter.messageForItem(at: indexPath, in: messagesCollectionView)
     }
-    
 
+    ///  Configure media message image view
+    func configureMediaMessageImageView(_ imageView: UIImageView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
+        presenter.configurMediaMessageImageView(imageView, for: message, at: indexPath, in: messagesCollectionView)
+    }
 }

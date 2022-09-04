@@ -15,43 +15,64 @@ extension Conversation: UITableViewDelegate, UITableViewDataSource {
         tableView.dataSource = self
         tableView.separatorStyle = .none
     }
+    
     /// Register table view cell
     func registerTableViewCell() {
         tableView.register(UINib(nibName: "ConversationCell", bundle: nil), forCellReuseIdentifier: "ConversationCell")
     }
+    
     /// Number of sections
     func numberOfSections(in tableView: UITableView) -> Int {
         presenter.numberOfSections(in: tableView)
     }
+    
     /// Number of row in section
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
+    
     /// Cell for row at
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         presenter.cellForRow(tableView, cellForRowAt: indexPath)
     }
+    
     /// Did selct row at
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter.didSelectRowAt(tableView, didSelectRowAt: indexPath)
     }
+    
     /// View for header
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return headerForSection()
     }
+    
     /// Header for section
     func headerForSection() -> UIView {
         let headerView = UIView()
         headerView.backgroundColor = UIColor.clear
         return headerView
     }
+    
     /// Height for header
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0
     }
+    
     /// Height for row
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 120
+    }
+    
+    /// Editing style for row at
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
+    }
+    
+    /// Commit editing style
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            presenter.deletingConversation(tableView, commit: editingStyle, forRowAt: indexPath)
+        }
     }
     
 }

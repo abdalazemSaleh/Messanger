@@ -18,6 +18,7 @@ class Register: UIViewController {
         presenter = RegisterPresentr(view: self)
         self.navigationController?.isNavigationBarHidden = true
         registerButton.layer.cornerRadius = 16
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
     }
     
     // MARK: - IBOtlet

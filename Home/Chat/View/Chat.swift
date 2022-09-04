@@ -7,14 +7,12 @@
 
 import UIKit
 import MessageKit
-import SwiftUI
 
 class Chat: MessagesViewController {
     
     // MARK: - Variables
     var presenter: ChatPresenter!
     var isNewConversatoin = false
-    var messages = [Message]()
     let reciverEmail: String
     var conversationId: String?
     
@@ -36,7 +34,8 @@ class Chat: MessagesViewController {
         presenter = ChatPresenter(view: self)
         setUpMessageLayoutAndDisplayDelegateAndDatasource()
         setUpInputAccessory()
-                
+        setUpinputButton()
+        
     }
     // MARK: -  Init
     init(email: String, id: String?) {
@@ -49,42 +48,11 @@ class Chat: MessagesViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-        override func viewDidAppear(_ animated: Bool) {
-            super.viewDidAppear(animated)
-            messageInputBar.inputTextView.becomeFirstResponder()
-            if let conversationId = conversationId {
-                getAllMessages(conversationId: conversationId, shouldScrollToBottom: true)
-            }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        messageInputBar.inputTextView.becomeFirstResponder()
+        if let conversationId = conversationId {
+            presenter.getAllMessages(conversationId: conversationId, shouldScrollToBottom: true)
         }
-    
-    // TODO: Refactoring -
-    
-    func getAllMessages(conversationId: String, shouldScrollToBottom: Bool) {
-        DatabaseManager.shared.fetchAllMessagesForConversation(id: conversationId, completion: { [weak self] result in
-            switch result {
-            case .success(let messages):
-                print("success in getting messages: \(messages)")
-                guard !messages.isEmpty else {
-                    print("messages are empty")
-                    return
-                }
-                self?.messages = messages
-                
-                DispatchQueue.main.async {
-                    self?.messagesCollectionView.reloadDataAndKeepOffset()
-                    
-                    if shouldScrollToBottom {
-                        self?.messagesCollectionView.scrollToLastItem()
-                    }
-                }
-                
-            case .failure(let error):
-                print("failed to get messages: \(error)")
-            }
-        })
     }
-    
-    
-    
-    
 }

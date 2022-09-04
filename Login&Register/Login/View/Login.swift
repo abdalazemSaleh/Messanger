@@ -55,6 +55,7 @@ class Login: UIViewController {
     }
     
     @IBAction func facebookButton(_ sender: UIButton) {
-        presnter.loginButtonClicked(myController: self)
+        
     }
+    
 }

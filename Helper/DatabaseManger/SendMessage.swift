@@ -15,11 +15,7 @@ extension DatabaseManager {
     func sendMessage(conversation: String, reciverEmail: String, reciverName: String, message: Message, completion: @escaping (Bool) -> (Void)) {
         // We will : - Send message & updateSender latest message & update reciver latest message
         /// Get user current email
-        guard let email = UserDefaults.standard.value(forKey: "email") as? String else {
-            completion(false)
-            return
-        }
-        let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
+        let safeEmail = Constant.shared.getUserSafeEmail()
         print(safeEmail)
         /// Get conversation
         getConversation(conversation: conversation, newMessage: message, name: reciverName, safeEmail: safeEmail, reciverEmail: reciverEmail, reciverName: reciverName, completion: { success in
@@ -110,22 +106,24 @@ extension DatabaseManager {
                 for conversationDictionary in currentUserConversations {
                     if let currentId = conversationDictionary["id"] as? String, currentId == conversation {
                         targetConversation = conversationDictionary
+                        break
                     }
-                    
-                    if var targetConversation = targetConversation {
-                        targetConversation["latest_message"] = latestMessage
-                        currentUserConversations[position] = targetConversation
-                        databaseEnteryConversations = currentUserConversations
-                    } else {
-                        let newConversationData: [String: Any] = [
-                            "id": conversation,
-                            "other_user_email": DatabaseManager.safeEmail(emailAddress: reciverEmail),
-                            "name": "",
-                            "latest_message": latestMessage
-                        ]
-                        currentUserConversations.append(newConversationData)
-                        databaseEnteryConversations = currentUserConversations
-                    }
+                    position += 1
+                }
+                
+                if var targetConversation = targetConversation {
+                    targetConversation["latest_message"] = latestMessage
+                    currentUserConversations[position] = targetConversation
+                    databaseEnteryConversations = currentUserConversations
+                } else {
+                    let newConversationData: [String: Any] = [
+                        "id": conversation,
+                        "other_user_email": DatabaseManager.safeEmail(emailAddress: reciverEmail),
+                        "name": "",
+                        "latest_message": latestMessage
+                    ]
+                    currentUserConversations.append(newConversationData)
+                    databaseEnteryConversations = currentUserConversations
                 }
             } else {
                 let newConversationData: [String: Any] = [
@@ -138,21 +136,22 @@ extension DatabaseManager {
                     newConversationData
                 ]
             }
+            
             self?.database.child("\(safeEmail)/conversations").setValue(databaseEnteryConversations, withCompletionBlock: { error, _ in
                 guard error == nil else {
                     completion(false)
                     return
                 }
+                /// Update recipent latest message
+                self?.updateRecipientLatestMessage(conversation: conversation, reciverEmail: reciverEmail, safeEmail: safeEmail, message: message, date: date, completion: { success in
+                    if success {
+                        print("Update recipient latest message successfuly")
+                    } else {
+                        print("Failed to update recipient message")
+                    }
+                })
+                
             })
-            /// Update recipent latest message
-            self?.updateRecipientLatestMessage(conversation: conversation, reciverEmail: reciverEmail, safeEmail: safeEmail, message: message, date: date, completion: { success in
-                if success {
-                    print("Update recipient latest message successfuly")
-                } else {
-                    print("Failed to update recipient message")
-                }
-            })
-            
         })
     }
     /// Update recipient latest mesage
