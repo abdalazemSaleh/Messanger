@@ -43,10 +43,22 @@ extension Chat: InputBarAccessoryViewDelegate {
             
         }))
         
+        actionSheet.addAction(UIAlertAction(title: "Location", style: .default, handler: { [weak self] _ in
+            self?.presentLocationPicker()
+        }))
+
+        
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         present(actionSheet, animated: true, completion: nil)
 
+    }
+    
+    func presentLocationPicker() {
+        let vc = LocationPicker(coordinates: nil)
+        vc.delegate = self
+        vc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func presentPhotoActionShhet() {

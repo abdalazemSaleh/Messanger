@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import MessageKit
+import CoreLocation
 
 #warning("Some refactoring in here")
 extension DatabaseManager {
@@ -50,6 +51,16 @@ extension DatabaseManager {
                                       placeholderImage: placholder,
                                       size: CGSize(width: 240, height: 300))
                     kind = .video(media)
+                } else if type == "location" {
+                    
+                    let locationCompnents = content.components(separatedBy: ",")
+                    guard let longitude = Double(locationCompnents[0]), let latitude = Double(locationCompnents[1]) else {
+                        return nil
+                    }
+                    let location = Location(location: CLLocation(latitude: latitude, longitude: longitude),
+                                            size: CGSize(width: 240, height: 300))
+                    
+                    kind = .location(location)
                 } else {
                     kind = .text(content)
                 }

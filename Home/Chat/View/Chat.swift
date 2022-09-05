@@ -35,7 +35,6 @@ class Chat: MessagesViewController {
         setUpMessageLayoutAndDisplayDelegateAndDatasource()
         setUpInputAccessory()
         setUpinputButton()
-        
     }
     // MARK: -  Init
     init(email: String, id: String?) {

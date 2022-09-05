@@ -10,6 +10,7 @@ import MessageKit
 import Kingfisher
 import AVFoundation
 import AVKit
+import CoreLocation
 
 // MARK: - Chat view
 protocol chatView: AnyObject {
@@ -17,6 +18,7 @@ protocol chatView: AnyObject {
     func scrollToLastItem()
     func goToPhotoViewerScreen(url: URL)
     func goToViedoViewer(url: URL)
+    func goToLocationView(coordinates: CLLocationCoordinate2D)
 }
 
 // MARK: - Messanger presenter
@@ -80,6 +82,7 @@ class ChatPresenter {
             break
         }
     }
+    
     /// Did tap image
     func didTapImage(indexPath: IndexPath) {
         let message = messages[indexPath.section]
@@ -94,6 +97,18 @@ class ChatPresenter {
                 return
             }
             view?.goToViedoViewer(url: videoUrl)
+        default:
+            break
+        }
+    }
+    
+    /// Did tap message
+    func didTapMessage(indexPath: IndexPath) {
+        let message = messages[indexPath.section]
+        switch message.kind {
+        case .location(let locationData):
+            let coordinats = locationData.location.coordinate
+            view?.goToLocationView(coordinates: coordinats)
         default:
             break
         }
@@ -157,7 +172,7 @@ class ChatPresenter {
         })
     }
     
-    /// Send photo message
+    /// Send video message
     private func sendVideoMessage(url: URL, messegeId: String, conversationId: String, reciverEmail: String, reciverName: String, sender: sender) {
         /// variables
         guard let placeholder = UIImage(systemName: "photo") else {
@@ -182,4 +197,28 @@ class ChatPresenter {
         })
     }
     
+    // MARK: - Upload location message
+    func sendLocation(conversationId: String, messageId: String, reciverEmail: String, reciverName: String, sender: sender, coordinates: CLLocationCoordinate2D) {
+        /// Get longitude and latitude
+        let longitude: Double = coordinates.longitude
+        let latitude: Double = coordinates.latitude
+        print("long=\(longitude) | lat= \(latitude)")
+
+
+        let location = Location(location: CLLocation(latitude: latitude, longitude: longitude), size: .zero)
+        
+        let message = Message(sender: sender,
+                              messageId: messageId,
+                              sentDate: Date(),
+                              kind: .location(location))
+        
+        DatabaseManager.shared.sendMessage(conversation: conversationId, reciverEmail: reciverEmail, reciverName: reciverName, message: message, completion: { success in
+            if success {
+                print("sent location message")
+            }
+            else {
+                print("failed to send location message")
+            }
+        })
+    }
 }

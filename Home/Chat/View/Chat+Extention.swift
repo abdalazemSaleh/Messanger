@@ -8,6 +8,7 @@
 import Foundation
 import AVFoundation
 import AVKit
+import CoreLocation
 
 extension Chat: chatView {
     
@@ -31,5 +32,13 @@ extension Chat: chatView {
         vc.player = AVPlayer(url: url)
         present(vc, animated: true, completion: nil)
     }
+    
+    // Go to location view
+    func goToLocationView(coordinates: CLLocationCoordinate2D) {
+        let vc = LocationPicker(coordinates: coordinates)
+        vc.isPickable = false
+        navigationController?.pushViewController(vc, animated: true)
+    }
+
 
 }
