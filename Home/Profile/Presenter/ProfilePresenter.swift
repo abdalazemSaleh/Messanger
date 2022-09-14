@@ -27,7 +27,7 @@ class ProfilePresenter {
     //MARK: -  Upload image to firebase storage
     func upload_image(image: UIImageView) {
         /// Get safe email
-        let safeEmail = getSafeEmail()
+        let safeEmail = Constant.shared.getUserSafeEmail()
         /// Convert image to png data
         guard let image = image.image,
         let data = image.pngData() else {
@@ -49,8 +49,9 @@ class ProfilePresenter {
     //MARK: - Download photo from firbase storage
     func downloadPhoto() {
         /// Get file name
-        let fileName = "\(getSafeEmail())profile_picture.png"
-        print(getSafeEmail())
+        let safeEmail = Constant.shared.getUserSafeEmail()
+        let fileName = "\(safeEmail)_profile_picture.png"
+        print(safeEmail)
         StorageManager.shared.downloadPhoto(fileName: fileName, completion: { [weak self] result in
             switch result {
             case .success(let url):
@@ -69,14 +70,6 @@ class ProfilePresenter {
         } catch {
             print("Error")
         }
-    }
-    // MARK: - Get safe email
-    func getSafeEmail() -> String {
-        guard let email = UserDefaults.standard.value(forKey: "email") as? String else {
-            return ""
-        }
-        let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
-        return safeEmail
     }
         
     //MARK: - Present photo action cheet

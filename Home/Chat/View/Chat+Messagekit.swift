@@ -40,4 +40,13 @@ extension Chat: MessagesLayoutDelegate, MessagesDataSource, MessagesDisplayDeleg
     func configureMediaMessageImageView(_ imageView: UIImageView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
         presenter.configurMediaMessageImageView(imageView, for: message, at: indexPath, in: messagesCollectionView)
     }
+    /// Chat back ground color
+    func backgroundColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
+        let sender = message.sender
+        let recivedMessegeColor = UIColor(named: "RecivedMessageColor")!
+        if sender.senderId == selfSender?.senderId {
+            return .secondarySystemBackground
+        }
+        return recivedMessegeColor
+    }
 }

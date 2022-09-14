@@ -8,19 +8,18 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Tab Bar View Controller-->
+        <!--Tab Bar Controller-->
         <scene sceneID="qVm-7S-IwK">
             <objects>
-                <tabBarController restorationIdentifier="tabBarScreen" storyboardIdentifier="tabBarScreen" id="Tgf-s8-iYM" customClass="TabBarViewController" customModule="Messanger" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController restorationIdentifier="tabBarScreen" storyboardIdentifier="tabBarScreen" id="Tgf-s8-iYM" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="gZb-PI-0MP">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                         <color key="selectedImageTintColor" red="0.48996484829999998" green="0.75158736749999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </tabBar>
                     <connections>
-                        <outlet property="myBar" destination="gZb-PI-0MP" id="ML3-ZZ-W7l"/>
                         <segue destination="aet-0L-QGj" kind="relationship" relationship="viewControllers" id="OEc-4G-p99"/>
-                        <segue destination="93P-dX-OCJ" kind="relationship" relationship="viewControllers" id="CoN-CD-Qnr"/>
                         <segue destination="VNl-T4-ts5" kind="relationship" relationship="viewControllers" id="hK1-fA-ebO"/>
                     </connections>
                 </tabBarController>
@@ -31,7 +30,7 @@
         <!--Item-->
         <scene sceneID="nqJ-VG-zUH">
             <objects>
-                <navigationController id="aet-0L-QGj" customClass="Conver" sceneMemberID="viewController">
+                <navigationController id="aet-0L-QGj" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" image="message.fill" catalog="system" selectedImage="message.fill" id="749-Pt-EoV"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="w8e-ET-HvE">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
@@ -153,27 +152,14 @@
             </objects>
             <point key="canvasLocation" x="496" y="1177"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="qPe-BK-obt">
-            <objects>
-                <navigationController id="93P-dX-OCJ" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" id="pQ6-2J-TfC">
-                        <inset key="largeContentSizeImageInsets" minX="0.0" minY="1" maxX="0.0" maxY="1"/>
-                    </tabBarItem>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="LuX-r5-V6J">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bz7-c2-q4J" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-675" y="494"/>
-        </scene>
     </scenes>
     <resources>
         <image name="message.fill" catalog="system" width="128" height="113"/>
         <image name="person.circle" catalog="system" width="128" height="121"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
+        <systemColor name="secondarySystemBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
